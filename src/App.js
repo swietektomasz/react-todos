@@ -28,17 +28,29 @@ class App extends Component {
 
   _handleAddTodo = text => {
     this.setState(({ todos }) => ({
-      todos: [...todos, { id: todos.length++, title: 'text', done: false }],
+      todos: [...todos, { id: todos.length++, title: text, done: false }],
     }))
   }
 
-  _handleChecked = event => {}
+  _handleTodoChecking = id => {
+    const editedTodos = this.state.todos.filter(todo => {
+      if (todo.id === id) {
+        todo.done = !todo.done
+      }
+
+      return todo
+    })
+
+    this.setState({
+      todos: editedTodos,
+    })
+  }
 
   render() {
     return (
       <div className="App">
-        <AddTodo handleAdding={this._handleAddTodo} handleChecking={this._handleChecked} />
-        <TodoList list={this.state.todos} />
+        <AddTodo handleAdding={this._handleAddTodo} handleInput={this._handleInput} />
+        <TodoList list={this.state.todos} updateCheckedTodos={this._handleTodoChecking} />
       </div>
     )
   }
