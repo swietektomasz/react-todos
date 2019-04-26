@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Todo from './Todo/Todo'
 
 export default class TodoList extends Component {
-  _handleChecking = id => {
-    this.props.updateCheckedTodos(id)
+  static propTypes = {
+    list: PropTypes.array,
+    id: PropTypes.number,
   }
 
   render() {
@@ -15,7 +17,7 @@ export default class TodoList extends Component {
             title={todo.title}
             done={todo.done}
             id={todo.id}
-            handleChecking={this._handleChecking}
+            handleChecking={this.props.updateCheckedTodos(this.props.id)}
           />
         ))}
       </div>

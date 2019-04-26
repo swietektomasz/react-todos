@@ -32,18 +32,10 @@ class App extends Component {
     }))
   }
 
-  _handleTodoChecking = id => {
-    const editedTodos = this.state.todos.map(todo => {
-      if (todo.id === id) {
-        return {
-          id: todo.id,
-          title: todo.title,
-          done: !todo.done,
-        }
-      }
-
-      return todo
-    })
+  _handleTodoChecking = () => id => {
+    const editedTodos = this.state.todos.map(todo =>
+      todo.id === id ? { ...todo, done: !todo.done } : todo,
+    )
 
     this.setState({
       todos: editedTodos,
