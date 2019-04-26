@@ -49,7 +49,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <AddTodo handleAdding={this._handleAddTodo} handleInput={this._handleInput} />
+        <AddTodo handleAdding={this._handleAddTodo} />
         <TodoList list={this.state.todos} updateCheckedTodos={this._handleTodoChecking} />
       </div>
     )
