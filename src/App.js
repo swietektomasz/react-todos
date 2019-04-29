@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
-import TodoList from './components'
-import AddTodo from './components/Todo/AddTodo'
+import TodoList from './components/Todos'
+import AddTodo from './components/Todos/AddTodo'
 
 const initialTodos = [
   {

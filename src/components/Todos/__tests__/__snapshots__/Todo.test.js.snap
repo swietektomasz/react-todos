@@ -1,0 +1,9 @@
+exports[`<Todo /> render 1`] = `
+<div>
+  <label />
+  <input
+    defaultChecked={undefined}
+    onChange={[Function]}
+    type="checkbox" />
+</div>
+`;

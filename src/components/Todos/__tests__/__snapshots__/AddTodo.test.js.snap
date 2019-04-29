@@ -1,0 +1,12 @@
+exports[`<AddTodo /> render 1`] = `
+<div>
+  <input
+    onChange={[Function]}
+    placeholder="add todo..."
+    value="" />
+  <button
+    onClick={[Function]}>
+    add
+  </button>
+</div>
+`;
