@@ -1,18 +1,42 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-export const Todo = ({ handleChecking, title, done, id }) => (
-  <div>
-    <label>{title}</label>
-    <input type="checkbox" onChange={() => handleChecking(id)} defaultChecked={done} />
-  </div>
-)
+import { toggleTodo, removeTodo } from './../../store/todos/actions'
 
-export default Todo
+const Todo = props => {
+  const {
+    todo: { id, title, createdAt, done },
+  } = props
+  return (
+    <div>
+      <label style={{ textDecorationLine: done ? 'line-through' : 'none' }}>
+        {createdAt}: {title}
+      </label>
+      <input type="checkbox" onChange={() => props.toggleTodo(id)} defaultChecked={done} />
+      <button onClick={() => props.removeTodo(id)}>x</button>
+    </div>
+  )
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      toggleTodo,
+      removeTodo,
+    },
+    dispatch,
+  )
+}
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Todo)
 
 Todo.propTypes = {
-  id: PropTypes.number,
-  title: PropTypes.string,
-  done: PropTypes.bool,
-  handleChecking: PropTypes.func,
+  todo: PropTypes.object.isRequired,
+  toggleTodo: PropTypes.func.isRequired,
+  removeTodo: PropTypes.func.isRequired,
 }
