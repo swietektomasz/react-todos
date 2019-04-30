@@ -1,7 +1,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import AddTodo from '../AddTodo'
+import { AddTodo } from '../AddTodo'
 
 const getWrapper = defaultProps => {
   const wrapper = renderer.create(<AddTodo {...defaultProps} />)
@@ -17,7 +17,7 @@ const getWrapper = defaultProps => {
 describe('<AddTodo />', () => {
   test('render', () => {
     const defaultProps = {
-      handleAdding: jest.fn(),
+      addTodo: jest.fn(),
     }
     const { wrapper, root } = getWrapper(defaultProps)
 
@@ -28,7 +28,7 @@ describe('<AddTodo />', () => {
 
   test('input text', () => {
     const defaultProps = {
-      handleAdding: jest.fn(),
+      addTodo: jest.fn(),
     }
     const { json, instance } = getWrapper(defaultProps)
     const insanceState = instance.state
@@ -36,18 +36,19 @@ describe('<AddTodo />', () => {
     expect(json.children[0].props.value).toBe(insanceState.text)
   })
 
-  test('calls handleAdding on _handleSubmit', () => {
+  test('calls addTodo on _handleSubmit', () => {
     const defaultProps = {
-      handleAdding: jest.fn(),
+      addTodo: jest.fn(),
     }
     const { json, instance } = getWrapper(defaultProps)
+    console.log(instance)
     const insanceState = instance.state
     instance._handleSubmit()
-    expect(defaultProps.handleAdding).toBeCalledWith('')
+    expect(defaultProps.addTodo).toBeCalledWith('')
 
     instance._handleInputChange({ target: { value: '123' } })
     instance._handleSubmit()
-    expect(defaultProps.handleAdding).toBeCalledWith('123')
+    expect(defaultProps.addTodo).toBeCalledWith('123')
 
     expect(json.children[0].props.value).toBe(insanceState.text)
   })

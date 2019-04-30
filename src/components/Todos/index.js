@@ -8,9 +8,9 @@ const TodoList = ({ todos }) => {
   return todos.map(todo => todo && <Todo key={todo.id} todo={todo} />)
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ todos }) => {
   return {
-    todos: state.todos,
+    todos,
   }
 }
 

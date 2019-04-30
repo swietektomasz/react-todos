@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 import { toggleTodo, removeTodo } from './../../store/todos/actions'
 
@@ -9,6 +8,7 @@ const Todo = props => {
   const {
     todo: { id, title, createdAt, done },
   } = props
+
   return (
     <div>
       <label style={{ textDecorationLine: done ? 'line-through' : 'none' }}>
@@ -20,14 +20,9 @@ const Todo = props => {
   )
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      toggleTodo,
-      removeTodo,
-    },
-    dispatch,
-  )
+const mapDispatchToProps = {
+  toggleTodo,
+  removeTodo,
 }
 
 export default connect(

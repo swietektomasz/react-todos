@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import { addTodo } from '../../store/todos/actions'
 
-const AddTodo = props => {
+export const AddTodo = props => {
   const [title, setTitle] = useState('')
   return (
     <div>
