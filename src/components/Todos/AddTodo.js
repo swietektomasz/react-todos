@@ -1,29 +1,38 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-export default class AddTodo extends Component {
-  state = {
-    text: '',
-  }
+import { addTodo } from '../../store/todos/actions'
 
-  _handleInputChange = e => {
-    this.setState({ text: e.target.value })
-  }
+export const AddTodo = props => {
+  const [title, setTitle] = useState('')
+  return (
+    <div>
+      <input
+        placeholder="add todo..."
+        defaultValue=""
+        onChange={({ target: { value } }) => setTitle(value)}
+      />
+      <button onClick={() => props.addTodo(title)}>add</button>
+    </div>
+  )
+}
 
-  _handleSubmit = () => {
-    this.props.handleAdding(this.state.text)
-    this.setState({ text: '' })
-  }
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      addTodo,
+    },
+    dispatch,
+  )
+}
 
-  render() {
-    return (
-      <div>
-        <input
-          placeholder="add todo..."
-          value={this.state.text}
-          onChange={this._handleInputChange}
-        />
-        <button onClick={this._handleSubmit}>add</button>
-      </div>
-    )
-  }
+export default connect(
+  null,
+  mapDispatchToProps,
+)(AddTodo)
+
+AddTodo.propTypes = {
+  addTodo: PropTypes.func.isRequired,
 }

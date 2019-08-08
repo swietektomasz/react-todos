@@ -1,29 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import Todo from './Todo'
 
-export default class TodoList extends Component {
-  static propTypes = {
-    list: PropTypes.array,
-    id: PropTypes.number,
-  }
+const TodoList = ({ todos }) => {
+  return todos.map(todo => todo && <Todo key={todo.id} todo={todo} />)
+}
 
-  render() {
-    const { list = [] } = this.props
-
-    return (
-      <div>
-        {list.map(todo => (
-          <Todo
-            key={todo.id}
-            title={todo.title}
-            done={todo.done}
-            id={todo.id}
-            handleChecking={() => this.props.updateCheckedTodos(this.props.id)}
-          />
-        ))}
-      </div>
-    )
+const mapStateToProps = ({ todos }) => {
+  return {
+    todos,
   }
+}
+
+export default connect(
+  mapStateToProps,
+  null,
+)(TodoList)
+
+TodoList.propTypes = {
+  todos: PropTypes.array.isRequired,
 }

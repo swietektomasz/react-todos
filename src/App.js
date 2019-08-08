@@ -3,6 +3,8 @@ import './App.css'
 import TodoList from './components/Todos'
 import AddTodo from './components/Todos/AddTodo'
 
+//TODO remove unused things
+
 const initialTodos = [
   {
     id: 0,
