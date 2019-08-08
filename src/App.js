@@ -1,57 +1,15 @@
 import React, { Component } from 'react'
-import './App.css'
-import TodoList from './components/Todos'
-import AddTodo from './components/Todos/AddTodo'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Home from './components/Home'
 
-//TODO remove unused things
-
-const initialTodos = [
-  {
-    id: 0,
-    title: 'do this',
-    done: true,
-  },
-  {
-    id: 1,
-    title: 'do that',
-    done: false,
-  },
-  {
-    id: 2,
-    title: 'do something',
-    done: false,
-  },
-]
-
-class App extends Component {
-  state = {
-    todos: initialTodos,
-  }
-
-  _handleAddTodo = text => {
-    this.setState(({ todos }) => ({
-      todos: [...todos, { id: todos.length++, title: text, done: false }],
-    }))
-  }
-
-  _handleTodoChecking = () => id => {
-    const editedTodos = this.state.todos.map(todo =>
-      todo.id === id ? { ...todo, done: !todo.done } : todo,
-    )
-
-    this.setState({
-      todos: editedTodos,
-    })
-  }
-
+export default class App extends Component {
   render() {
     return (
-      <div className="App">
-        <AddTodo handleAdding={this._handleAddTodo} />
-        <TodoList list={this.state.todos} updateCheckedTodos={this._handleTodoChecking} />
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" component={Home}></Route>
+        </Switch>
+      </BrowserRouter>
     )
   }
 }
-
-export default App

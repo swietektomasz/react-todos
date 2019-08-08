@@ -1,7 +1,10 @@
-import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } from './types'
+import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO, FETCH_TODOS } from './types'
 
 const todos = (state = [], { payload, type }) => {
   switch (type) {
+    case FETCH_TODOS: {
+      return [...state, payload]
+    }
     case ADD_TODO: {
       return [...state, payload]
     }

@@ -4,12 +4,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { addTodo } from '../../store/todos/actions'
+import { Input } from '../../Form/Input'
 
 export const AddTodo = props => {
   const [title, setTitle] = useState('')
   return (
     <div>
-      <input
+      <Input
         placeholder="add todo..."
         defaultValue=""
         onChange={({ target: { value } }) => setTitle(value)}
