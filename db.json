@@ -1,3 +1,16 @@
 {
-  "todos": [{ "id": 1, "title": "Do stuff", "description": "Do something with stuff" }]
+  "todos": [
+    {
+      "id": 1,
+      "title": "Do stuff",
+      "description": "Do something with stuff",
+      "done": true
+    },
+    {
+      "description": "Do something with more stuff",
+      "title": "Do more stuff",
+      "done": false,
+      "id": 2
+    }
+  ]
 }

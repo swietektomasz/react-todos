@@ -1,44 +1,19 @@
-import { connect } from 'react-redux'
-import React, { Component } from 'react'
+import React from 'react'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import TodoList from '../Todos'
-import AddTodo from '../Todos/AddTodo'
+import Edit from '../Todos/Edit'
 
-import { fetchTodos } from './../../store/todos/actions'
-
-import '../../App.css'
-
-class Home extends Component {
-  componentDidMount = () => {
-    this.props.fetchTodos()
-  }
-
-  render() {
-    const { todos } = this.props
-    console.log(todos)
-    return (
-      <div className="App">
-        {todos.map(todo => (
-          <p key={todo.id}>{todo.title}</p>
-        ))}
-        {/* <AddTodo handleAdding={this._handleAddTodo} />
-        <TodoList list={this.state.todos} updateCheckedTodos={this._handleTodoChecking} /> */}
-      </div>
-    )
-  }
+const Home = () => {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/todos/:id" component={Edit} />
+        <Route path="/todos" component={TodoList} />
+        <Redirect from="/" to="/todos" />
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
-const mapStateToProps = ({ todos }) => {
-  return {
-    todos,
-  }
-}
-
-const mapDispatchToProps = {
-  fetchTodos,
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Home)
+export default Home

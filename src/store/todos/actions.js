@@ -1,36 +1,87 @@
-import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO, FETCH_TODOS } from './types'
-import getRandomId from './../../utils/getRandomId'
-import { getTodos } from '../../api'
+import {
+  ADD_TODO,
+  FETCH_TODOS,
+  REMOVE_TODO,
+  TOGGLE_TODO,
+  UPDATE_TODO,
+  GET_TODO_BY_ID,
+} from './types'
+import * as api from '../../api'
 
-const _fetchTodos = payload => ({
+const fetchTodos = payload => ({
   type: FETCH_TODOS,
   payload,
 })
 
-export const addTodo = payload => ({
+const addTodo = payload => ({
   type: ADD_TODO,
-  payload: {
-    title: payload,
-    id: getRandomId(),
-    createdAt: new Date().toLocaleString(),
-    done: false,
-  },
+  payload,
 })
 
-export const removeTodo = payload => ({
+const removeTodo = payload => ({
   type: REMOVE_TODO,
   payload,
 })
 
-export const toggleTodo = payload => ({
+const toggleTodo = payload => ({
   type: TOGGLE_TODO,
   payload,
 })
 
-export const fetchTodos = () => {
+const updateTodo = payload => ({
+  type: UPDATE_TODO,
+  payload,
+})
+
+const getTodoById = payload => ({
+  type: GET_TODO_BY_ID,
+  payload,
+})
+
+export const getTodoByIdWithDispatch = id => {
   return dispatch => {
-    getTodos().then(data => {
-      dispatch(_fetchTodos(data))
+    api.fetchTodoById(id).then(data => {
+      dispatch(getTodoById(data))
+    })
+  }
+}
+
+export const addTodoWithDispatch = todo => {
+  return dispatch => {
+    api.newTodo(todo).then(data => {
+      dispatch(addTodo(data))
+    })
+  }
+}
+
+export const fetchTodosWithDispatch = () => {
+  return dispatch => {
+    api.getTodos().then(data => {
+      dispatch(fetchTodos(data))
+    })
+  }
+}
+
+export const toggleTodoWithDispatch = todo => {
+  return dispatch => {
+    api.toggleTodo(todo).then(data => {
+      dispatch(toggleTodo(data))
+    })
+  }
+}
+
+export const removeTodoWithDispatch = todo => {
+  return dispatch => {
+    api.removeTodo(todo).then(data => {
+      dispatch(removeTodo(data))
+    })
+  }
+}
+
+export const updateTodoWithDispatch = todo => {
+  return dispatch => {
+    api.updateTodo(todo).then(data => {
+      dispatch(updateTodo(data))
     })
   }
 }

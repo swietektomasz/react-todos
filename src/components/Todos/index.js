@@ -1,25 +1,37 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import { fetchTodosWithDispatch, getTodos } from '../../store/todos'
+import AddTodo from '../Todos/AddTodo'
 import Todo from './Todo'
 
-const TodoList = ({ todos }) => {
-  console.log(todos)
-  return todos.map(todo => todo && <Todo key={todo.id} todo={todo} />)
+class TodoList extends Component {
+  componentDidMount = () => {
+    this.props.fetchTodosWithDispatch()
+  }
+
+  render() {
+    const { nodes } = this.props
+    return (
+      <div>
+        {nodes.map(todo => {
+          return <Todo key={todo.id} todo={todo} />
+        })}
+        <AddTodo />
+      </div>
+    )
+  }
 }
 
-const mapStateToProps = ({ todos }) => {
-  return {
-    todos,
-  }
+const mapStateToProps = state => {
+  return getTodos(state)
+}
+
+const mapDispatchToProps = {
+  fetchTodosWithDispatch,
 }
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(TodoList)
-
-TodoList.propTypes = {
-  todos: PropTypes.array.isRequired,
-}
