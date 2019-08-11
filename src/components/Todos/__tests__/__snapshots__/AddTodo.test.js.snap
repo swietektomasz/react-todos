@@ -1,12 +1,35 @@
 exports[`<AddTodo /> render 1`] = `
-<div>
-  <input
-    onChange={[Function]}
-    placeholder="add todo..."
-    value="" />
+<form
+  onSubmit={[Function]}>
+  <div>
+    <label>
+      Title
+    </label>
+    <input
+      autoComplete="off"
+      name="title"
+      onBlur={[Function]}
+      onChange={[Function]}
+      required={true}
+      type={undefined}
+      value="" />
+  </div>
+  <div>
+    <label>
+      Description
+    </label>
+    <input
+      autoComplete="off"
+      name="description"
+      onBlur={[Function]}
+      onChange={[Function]}
+      required={true}
+      type={undefined}
+      value="" />
+  </div>
   <button
-    onClick={[Function]}>
+    type="submit">
     add
   </button>
-</div>
+</form>
 `;
