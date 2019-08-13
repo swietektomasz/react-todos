@@ -72,8 +72,8 @@ export const toggleTodoWithDispatch = todo => {
 
 export const removeTodoWithDispatch = todo => {
   return dispatch => {
-    api.removeTodo(todo).then(data => {
-      dispatch(removeTodo(data))
+    api.removeTodo(todo).then(() => {
+      dispatch(removeTodo(todo))
     })
   }
 }

@@ -41,7 +41,6 @@ describe('<AddTodo />', () => {
       addTodo: jest.fn(),
     }
     const { json, instance } = getWrapper(defaultProps)
-    console.log(instance)
     const insanceState = instance.state
     instance._handleSubmit()
     expect(defaultProps.addTodo).toBeCalledWith('')

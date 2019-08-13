@@ -1,3 +1,4 @@
+import { isUndefined } from 'lodash'
 import {
   FETCH_TODOS,
   ADD_TODO,
@@ -7,10 +8,7 @@ import {
   GET_TODO_BY_ID,
 } from './types'
 
-const todos = (
-  state = { nodes: [], byId: { id: null, title: '', description: '', done: false } },
-  { payload, type },
-) => {
+const todos = (state = { nodes: [], byId: {} }, { payload, type }) => {
   switch (type) {
     case FETCH_TODOS: {
       return { ...state, nodes: payload }
@@ -19,7 +17,10 @@ const todos = (
       return { ...state, nodes: [...state.nodes, payload] }
     }
     case REMOVE_TODO: {
-      return state.filter(({ nodes }) => nodes.id !== payload.id)
+      const newNodes = state.nodes.filter(todo => {
+        return todo.id !== payload.id
+      })
+      return { ...state, nodes: newNodes }
     }
     case TOGGLE_TODO: {
       const nodes = state.nodes.map(todo => {
@@ -34,8 +35,7 @@ const todos = (
       return { ...state, nodes }
     }
     case GET_TODO_BY_ID: {
-      console.log(payload)
-      return { ...state, byId: payload, poop: 'stinky' }
+      return { ...state, byId: payload }
     }
     default:
       return state
