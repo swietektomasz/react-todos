@@ -1,4 +1,3 @@
-import { isUndefined } from 'lodash'
 import {
   FETCH_TODOS,
   ADD_TODO,
